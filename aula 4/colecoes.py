@@ -4,10 +4,10 @@ lista = [] #PODE MODIFICAR O QUE TEM DENTRO // PRINT(LISTA[INDEX])
 dicionario = {"Nome": "Tarik","Telefone": 14784512} #ACESSA PELO NOME DA CHAVE // PRINT(DICIONARIO)
 
 
-tupla = () #NÃO PODE MODIFICAR O QUE TEM DENTRO //PRINT(TUPLA[INDEX])
+tupla = ('Botafogo','Fluminense','Ceara') #NÃO PODE MODIFICAR O QUE TEM DENTRO //PRINT(TUPLA[INDEX])
 
 vogais = ('a','e','i','o','u')
-vogais[1] = 'E'
+vogais[1] = 'E' ## NÃO VAI MUDAR ASSIM 
 
 
 conjunto = {} #
@@ -37,5 +37,6 @@ print(aluno)
 aluno.pop(0) # REMOVE DE ACORDO COM O INDEX DO ITEM INFORMADO 
 print(aluno)
 
-#FUNÇÕES MIN E MAX
+#FUNÇÕES MIN E MAX ** PARA NOMES O MIN VAI DAR O MENOR NOME E MAX VAI DA O MAIOR ** 
 # FUNÇÃO SUM SOMA OS NUMEROS DENTRO DA LISTA
+# LEN VE O TAMANHO DA LISTA 
