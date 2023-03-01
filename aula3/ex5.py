@@ -10,7 +10,7 @@ while True:
     elif num % 2 == 0:
         print(f"{num} não é um numero primo")
     else:
-        print("NaN")
+        print("isso NaN")
    
 '''
 numero = int(input("Digite um numero inteiro: "))
