@@ -7,7 +7,7 @@ for i in range(len(palavra)):
     else:
         numero == 1    
 
-    print(palavra[i], '-->',numero)    
+    print(palavra, '-->',numero)    
 
 '''
 dict = int(input("Digite uma palavra: "))
@@ -17,4 +17,6 @@ for i in dict:
     else:
         dict[i] = 1
 print(dict)            
-'''        
+'''     
+
+
