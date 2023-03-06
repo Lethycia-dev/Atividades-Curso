@@ -8,7 +8,9 @@ limite inferior=13
 limite superior = 26
 lista exibida: [14,15,16,18,20,24,26]
 '''
+'''
 def questaoLista():
+
     lista = [12,14,15,16,18,20,24,26,28,32,34,38]
     listaNova = []
     for i in lista:
@@ -19,3 +21,15 @@ def questaoLista():
     return listaNova
 
 print(questaoLista())
+'''
+
+def questaoLista1():
+    lista1 = []
+    for i in range(10):
+        i = input("Digite um numero: ")
+        lista1.append(i)
+        print(lista1)
+    return lista1
+
+print(questaoLista1())
+        
