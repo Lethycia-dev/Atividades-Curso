@@ -1,6 +1,6 @@
 class Funcionario:
 
-    def __init__(self, nome, salario, faltas) -> None:
+    def __init__(self, nome, salario, faltas):
 
         self.nome = nome
         self.salario = salario
@@ -8,29 +8,32 @@ class Funcionario:
 
     def aumentarSalario(self,valorAumento):
         
-        self.novoSalario = self.salario + valorAumento
+        self.salario = self.salario + valorAumento
 
     def descontarFalta(self):
         
         valorfaltas = (self.salario / 30) * self.faltas
-        self.descontarfalta = self.salario - valorfaltas
+        self.novosalario = self.salario - valorfaltas
         
 
     def informacoes(self):
         
-        informacao = f'¬ Nome - {self.nome}, Salário - {self.salario} e Faltas - {self.faltas}.'
+        informacao = f'¬ Nome - {self.nome}, Salário - R${self.salario} e Faltas - {self.faltas}.'
         return informacao
     
     def informacaoAtualizada(self):
         
-        informacaoAtual = f'¬ Nome - {self.nome}, Salário - {self.descontarfalta} e Faltas - {self.faltas}.'
+        informacaoAtual = f'¬ Nome - {self.nome}, Salário - R${self.novosalario:.2f} e Faltas - {self.faltas}.'
         return informacaoAtual
 
-funcionario1 = Funcionario('Jhosephe', 7700, 11)
+funcionario1 = Funcionario('Jhosephe', 7700, 7)
 
 print(funcionario1.informacoes())
-funcionario1.descontarFalta()
+
 funcionario1.aumentarSalario(2000)
+
+funcionario1.descontarFalta()
+
 print(funcionario1.informacaoAtualizada())
 
 
