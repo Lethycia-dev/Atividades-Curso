@@ -3,7 +3,7 @@ class Pokemon():
         self.nome = nome
         self.atk = ataque
         self.dfsa = defesa
-        self.hp = vida
+        self._vida = vida
 
 
 pokemon1 = Pokemon("Pikachu",1000,600)
