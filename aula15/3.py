@@ -16,7 +16,7 @@ class Pokemon:
     def batalha(self,oponente):
         if play1(self._ataque) + (self._defesa) >  play2(self._ataque) + play2(self._defesa):
             pokemonWin = play1(self._nome)
-            print(f"ganhoador é {pokemonWin}")           
+            print(f"ganhador é {pokemonWin}")           
 
 
 class PokemonFogo(Pokemon):
@@ -33,3 +33,4 @@ class PokemonGrama(Pokemon):
 
 play1 = Pokemon("500","400","caca","grama","1200","doido","papa")        
 play2 = Pokemon("100","300","dada","grama","1000","doido","rara")        
+

@@ -1,0 +1,16 @@
+[
+    {
+        "nome": "Jhon",
+        "salario": 1000,
+        "cargo": "analista",
+        "cpf": "123456789",
+        "departamento": "RH"
+    },
+    {
+        "nome": "Jhon 2",
+        "salario": 2000,
+        "cargo": "analista",
+        "cpf": "12345",
+        "departamento": "ADM"
+    }
+]
