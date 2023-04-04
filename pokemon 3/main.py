@@ -2,29 +2,42 @@ import random
 import pokedex
 
 class Pokemon:  
-    def __init__(self, nome, tipo, ataque, defesa, hp):
+    def __init__(self, nome, tipo, ataque, defesa):
         self._nome = nome 
         self._tipo = tipo
         self._ataque = ataque
         self._defesa = defesa
-        self._hp = hp
       
 
 class Agua(Pokemon):
-    def __init__(self, nome, tipo, ataque, defesa, hp):
-        super().__init__(nome, tipo, ataque, defesa, hp)
-        self._tipo = "agua"
+    def __init__(self, nome, tipo, ataque, defesa ):
+        super().__init__(nome, tipo, ataque, defesa )
+        self._tipo = "Água"
       
 class Fogo(Pokemon):
-    def __init__(self, nome, tipo, ataque, defesa, hp):
-        super().__init__(nome, tipo, ataque, defesa, hp)
-        self._tipo = "fogo"
+    def __init__(self, nome, tipo, ataque, defesa ):
+        super().__init__(nome, tipo, ataque, defesa )
+        self._tipo = "Fogo"
       
-class Terra(Pokemon):
-    def __init__(self, nome, tipo, ataque, defesa, hp):
-        super().__init__(nome, tipo, ataque, defesa, hp)
-        self._tipo = "terra"
-      
+class Grama(Pokemon):
+    def __init__(self, nome, tipo, ataque, defesa ):
+        super().__init__(nome, tipo, ataque, defesa )
+        self._tipo = "Grama"
+class Inseto(Pokemon):
+    def __init__(self, nome, tipo, ataque, defesa):
+        super().__init__(nome, tipo, ataque, defesa)
+        self._tipo = "Inseto"
+
+class Venenoso(Pokemon):
+    def __init__(self, nome, tipo, ataque, defesa):
+        super().__init__(nome, tipo, ataque, defesa)
+        self._tipo = "Venenoso"
+
+class Normal(Pokemon):
+    def __init__(self, nome, tipo, ataque, defesa):
+        super().__init__(nome, tipo, ataque, defesa)
+        self._tipo = "Normal"                
+
 class Treinador: 
     def __init__(self, nome, listaPokemons):
         self._nome = nome
@@ -38,10 +51,9 @@ class Jogador(Treinador):
         super().__init__(nome, listaPokemons)
 
     def escolherPokemon(self):
-        contador = 1
-        for pokemon in self._listaPokemons:
-            print(f"{contador} {pokemon}")
-            contador += 1
+      
+        print(self._listaPokemons)
+        
 
     def capturarPokemon(self):
 
@@ -52,14 +64,22 @@ class Jogador(Treinador):
            
             pokemonAleatorio = random.choice(pokedex.pokemons)
             match pokemonAleatorio['tipo']:
-                case 'agua':
-                    novoPokemon = Agua(pokemonAleatorio["nome"],pokemonAleatorio["tipo"],pokemonAleatorio,"ataque",pokemonAleatorio["defesa"],pokemonAleatorio["hp"])
+                case 'Água':
+                    novoPokemon = Agua(pokemonAleatorio['nome'],pokemonAleatorio['tipo'],pokemonAleatorio['ataque'],pokemonAleatorio['defesa'])
                     
-                case 'fogo':
-                    novoPokemon = Fogo(pokemonAleatorio["nome"],pokemonAleatorio["tipo"],pokemonAleatorio,"ataque",pokemonAleatorio["defesa"],pokemonAleatorio["hp"])
+                case 'Fogo':
+                    novoPokemon = Fogo(pokemonAleatorio['nome'],pokemonAleatorio['tipo'],pokemonAleatorio['ataque'],pokemonAleatorio['defesa'])
 
-                case 'terra': 
-                    novoPokemon = Terra(pokemonAleatorio["nome"],pokemonAleatorio["tipo"],pokemonAleatorio,"ataque",pokemonAleatorio["defesa"],pokemonAleatorio["hp"])
+                case 'Grama': 
+                    novoPokemon = Grama(pokemonAleatorio['nome'],pokemonAleatorio['tipo'],pokemonAleatorio['ataque'],pokemonAleatorio['defesa'])
+
+                case 'Inseto':
+                    novoPokemon = Inseto(pokemonAleatorio['nome'],pokemonAleatorio['tipo'],pokemonAleatorio['ataque'],pokemonAleatorio['defesa'])
+                case 'Venenoso':
+                    novoPokemon = Venenoso(pokemonAleatorio['nome'],pokemonAleatorio['tipo'],pokemonAleatorio['ataque'],pokemonAleatorio['defesa'])
+                case 'Normal':
+                    novoPokemon = Normal(pokemonAleatorio['nome'],pokemonAleatorio['tipo'],pokemonAleatorio['ataque'],pokemonAleatorio['defesa'])
+    
 
             listaAleatoria.append(novoPokemon)
 
@@ -68,9 +88,17 @@ class Jogador(Treinador):
             print(f"{contador} - {pokemon._nome}")
             contador += 1 
 
-        op = int(input("Digite o pokemon que você deseja:"))   
-        self._listaPokemons.append = listaAleatoria[op]  
-      
+        op = int(input("Digite o pokemon que você deseja:"))
+        match op:
+            case "1":
+                self._listaPokemons.append(op-1)
+
+            case "2":    
+                self._listaPokemons.append(op-1)
+            case "3":
+                self._listaPokemons.append(op-1)
+
+              
                
                     
            
@@ -104,22 +132,18 @@ def batalhaPokemon(play1, play2):
 while True :
     print('''
     Menu:
-
     1- Capturar Pokemon
     2- Batalha Pokemon
     3- Sair
-
-
     ''')
     op = input("Digite a opção que deseja executar: ")
     match op:
         case "1":
-            Jogador.capturarPokemon()
+            Jogador.capturarPokemon("pokemon")
 
         case "2":
-            batalhaPokemon(play1="dudu",play2="dada")
+            Jogador.escolherPokemon("pokemon")
+            batalhaPokemon("p1","p2")
         case "3":
             print("saindo...")
-            break     
-
-
+            break  
