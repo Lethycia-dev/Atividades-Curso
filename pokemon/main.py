@@ -180,7 +180,6 @@ while True :
             Jogador.capturarPokemon("")
 
         case "2":
-            
             batalhaPokemon("p1","p2")
         case "3":
             print("saindo...")
