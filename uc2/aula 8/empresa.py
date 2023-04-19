@@ -65,7 +65,7 @@ def verFuncionarios():
         print("--------------")
 
     input("Enter...")
-    
+
 def verDepartamento():
     
     cursor.execute('''
@@ -111,6 +111,9 @@ def inserirDepartamento():
     
     '''
     )
+    conn.commit()
+    print("Departamento inserido com sucesso")
+
     input("Enter...")
 try:
 
