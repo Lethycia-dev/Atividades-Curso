@@ -98,6 +98,8 @@ def inserirFuncionario():
     conn.commit()
     print("Funcionario inserido com sucesso!")
 
+    conn.close()
+    
     input("Enter...")
 
 def inserirDepartamento():
@@ -113,6 +115,8 @@ def inserirDepartamento():
     )
     conn.commit()
     print("Departamento inserido com sucesso")
+    
+    conn.close()
 
     input("Enter...")
 try:
