@@ -43,6 +43,19 @@ import psycopg2
 # except(Exception,psycopg2.Error) as error:
 #     print("Ocorreu um erro: ", error)
 
+def consultaBanco():
+
+        cursor.execute('''
+ 
+        SELECT * FROM "Funcionarios"
+        WHERE "Func_salario" <> 'R$ 3000,00'
+        '''
+        ) 
+
+        banco = cursor.fetchall()
+        for funcionario in banco:
+               print(funcionario[0],funcionario[1],funcionario[2],funcionario[3])
+        
 try:
 
         conn = psycopg2.connect(dbname = "Empresa2", host = "localhost", port = "5432", user = "postgres", password = "postgres")
@@ -59,17 +72,12 @@ try:
    
         # conn.commit()
 
-        cursor.execute ('''
-        INSERT INTO "Funcionarios"
-        VALUES (default,'Maria Joaquina',12345,2000,2),
-        (default,'Cirilo',1234,4000,2),
-        (default,'Alicia',12345,7000,2)
-              
-        ''')
+        # 
+        
+        cursor.execute(consultaBanco())
         conn.commit()
-
-        print("Tudo certo...")
         conn.close()
+        cursor.close()
 
 except(Exception,psycopg2.Error) as error:
      print("Ocorreu um erro: ", error)
