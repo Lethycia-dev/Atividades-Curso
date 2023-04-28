@@ -38,6 +38,7 @@ def verListaLivros():
     ORDER BY "Id" ASC
     
     ''')
+    input("Enter...")
 
 
 def verListaClientes():
@@ -48,7 +49,7 @@ def verListaClientes():
     ORDER BY "Id" ASC
     
     ''') 
-
+    input("Enter...")
 
 try:
     # conexaoLivros.alterarLivros('''
