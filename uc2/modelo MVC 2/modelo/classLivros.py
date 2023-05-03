@@ -12,7 +12,7 @@ class Livros:
 
     def cadastrarLivro(self):
 
-        sql = '''
+        sql = f'''
         
         INSERT INTO "Livros"
         VALUES (default,'{self._nome}','{self._autor}') 

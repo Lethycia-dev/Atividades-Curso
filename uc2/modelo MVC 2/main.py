@@ -14,42 +14,98 @@ def inserirCliente():
      conexaoLivros.alterarLivros(cliente.cadastrarCliente())
 
      print("Cliente cadastrado com sucesso!") 
+     input("Enter...")
 
 
 def inserirLivro():
      
-     livro = Livros(None,input("Digite o nome do cliente: "),input("Digite o nome do Autor: "))
+     livro = Livros(None,input("Digite o nome do livro: "),input("Digite o nome do Autor: "))
      conexaoLivros.alterarLivros(livro.cadastrarLivro())
 
      print("Livro cadastrado com sucesso!") 
+     input("Enter...")
 
 def inserirAluguel():
-     
-    aluguel = Alugueis(None,None,None)
-    conexaoLivros.alterarLivros(aluguel.cadastrarAluguel())
+    
+    
+     aluguel = Alugueis(None,input(f"Digite o ID do Livro: "),input(f"Digite o ID do Cliente: "),None,input("Devolução: "))
+     conexaoLivros.alterarLivros(aluguel.cadastrarAluguel())
 
-    print("Aluguel cadastrado com sucesso!")
+     print("Aluguel cadastrado com sucesso!")
+     input("Enter...")
 
 def verListaLivros():
 
-    conexaoLivros.consultaLivros('''
+    listaLivros = conexaoLivros.consultaLivros('''
     
     SELECT * FROM "Livros"
-    ORDER BY "Id" ASC
     
     ''')
+    for livro in listaLivros:
+         print(f'''
+         ID - {livro[0]}
+         Nome - {livro[1]}
+         Autor - {livro[2]}
+         
+         ''')
     input("Enter...")
-
+     
 
 def verListaClientes():
 
-    conexaoLivros.consultaClientes('''
+    listaClientes = conexaoLivros.consultaClientes('''
     
     SELECT * FROM "Clientes"
-    ORDER BY "Id" ASC
-    
-    ''') 
+   
+    ''')  
+
+    for cliente in listaClientes:
+         print(f'''
+          ID - {cliente[0]}
+          Nome - {cliente[1]}
+         
+         ''')
+
     input("Enter...")
+
+def verListaAlugueis():
+    
+
+    listaAlugueis = conexaoLivros.consultaLivros('''
+    
+    SELECT * FROM "Alugueis"
+    
+    ''')
+
+    for aluguel in listaAlugueis:
+         livro = conexaoLivros.consultaLivros(f'''
+         
+            SELECT * FROM "Livros"
+            WHERE
+            "Id_Livro" = {aluguel[1]}
+         
+         ''')[0]
+
+         cliente = conexaoLivros.consultaLivros(f'''
+         
+            SELECT * FROM "Clientes"
+            WHERE
+            "Id_Cliente" = {aluguel[2]}
+         
+         ''')[0]
+
+         print(f'''
+         ID Aluguel- {aluguel[0]}
+         ID Livro - {aluguel[1]}
+         Nome Livro - {livro[1]}
+         ID Cliente - {aluguel[2]}
+         Nome Cliente - {cliente[1]}
+         Data de Aluguel - {aluguel[3]}
+         Data de Entrega - {aluguel[4]}
+
+         ''')
+
+    input("Enter...")    
 
 try:
     # conexaoLivros.alterarLivros('''
@@ -103,37 +159,53 @@ try:
     # ''')
     # print("Clientes cadastrados!")
 
+     # conexaoLivros.alterarLivros('''
+     
+     # DELETE FROM 
+     #      "Alugueis"
+     #      WHERE
+     #      "Id_Aluguel" = 3
+     
+     # ''')
+     # print("deletado!")
+
+
+
     while True:
          print('''
          
             Menu:
             1 - Ver Livros
             2 - Ver Clientes
-            3 - Cadastrar Livro
-            4 - Cadastrar Cliente
-            5 - Cadastrar Aluguel
+            3 - Ver Alugueis
+            4 - Cadastrar Livro
+            5 - Cadastrar Cliente
+            6 - Cadastrar Aluguel
             0 - Sair
 
          ''')
          op = input("Digite uma opção: ")
 
          match op:
-              case "1": 
+               case "1": 
                    verListaLivros()
                
-              case "2": 
+               case "2": 
                    verListaClientes()
               
-              case "3": 
+               case "3": 
+                   verListaAlugueis()
+
+               case "4": 
                    inserirLivro()
               
-              case "4": 
+               case "5": 
                    inserirCliente()
     
-              case "5": 
+               case "6": 
                    inserirAluguel()
 
-              case "0":
+               case "0":
                    print("Saindo...")
                    break         
 

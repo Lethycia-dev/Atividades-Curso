@@ -7,7 +7,7 @@ class Cliente:
         self._nome = nome
 
     def cadastrarCliente(self):
-        sql = '''
+        sql = f'''
         
         INSERT INTO "Clientes"
         VALUES (default,'{self._nome}')

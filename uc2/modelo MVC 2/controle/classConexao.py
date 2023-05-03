@@ -14,6 +14,9 @@ class Conexao:
         conn = psycopg2.connect(dbname = self._dbname,host = self._host,port = self._port,user = self._user,password = self._password)
         cursor = conn.cursor()
 
+        cursor.execute(sql)
+        
+
         listaLivros = cursor.fetchall()
 
         cursor.close()
@@ -25,12 +28,28 @@ class Conexao:
         conn = psycopg2.connect(dbname = self._dbname,host = self._host,port = self._port,user = self._user,password = self._password)
         cursor = conn.cursor()
 
+        cursor.execute(sql)
+
         listaClientes = cursor.fetchall()
 
         cursor.close()
         conn.close()
 
         return listaClientes
+    
+    def consultaAlugueis(self,sql):
+        conn = psycopg2.connect(dbname = self._dbname,host = self._host,port = self._port,user = self._user,password = self._password)
+        cursor = conn.cursor()
+
+        cursor.execute(sql)
+
+        listaAlugueis = cursor.fetchall()
+
+        cursor.close()
+        conn.close()
+
+        return listaAlugueis
+
 
 
     def alterarLivros(self,sql):
