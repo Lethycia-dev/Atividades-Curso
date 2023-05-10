@@ -39,6 +39,7 @@ def verListaLivros():
     listaLivros = conexaoLivros.consultaLivros('''
     
     SELECT * FROM "Livros"
+    ORDER BY "Id_Livro" ASC
     
     ''')
     for livro in listaLivros:
@@ -56,6 +57,7 @@ def verListaClientes():
     listaClientes = conexaoLivros.consultaClientes('''
     
     SELECT * FROM "Clientes"
+    ORDER BY "Id_Cliente" ASC
    
     ''')  
 
@@ -66,7 +68,54 @@ def verListaClientes():
          
          ''')
 
-    input("Enter...")
+
+    verClienteEspecifico()         
+
+def verClienteEspecifico():
+    
+    clienteEspecifico = input("Ver informações especificas de um cliente? S/N ")
+
+    if clienteEspecifico.upper == "S" or clienteEspecifico == "s":
+            
+            idEspecifico = input("Digite o ID do Cliente que deseja ver mais informações: ")
+
+            cliente = conexaoLivros.consultaClientes(f'''
+            SELECT * FROM "Clientes"
+            WHERE "Id_Cliente" = {idEspecifico}
+            ''')
+
+            print(f"Cliente escolhido: {cliente[1]}")
+            
+            listaAlugueis = conexaoLivros.consultaAlugueis(f'''
+            
+            SELECT * FROM "Alugueis" 
+            WHERE "Id_Cliente" = {idEspecifico}
+            
+            ''')
+            if listaAlugueis:
+              for aluguel in listaAlugueis:
+                clientedoAluguel = conexaoLivros.consultaAlugueis(f'''
+                SELECT * FROM "Alugueis"
+                WHERE "Id_Cliente" = {aluguel[0]}
+                
+                ''')[0]
+                livroDoAluguel = conexaoLivros.consultaLivros(f'''
+                
+                SELECT * FROM "Livros"
+                WHERE "Id_Livro" = {aluguel[0]}
+                
+                ''')[0]
+
+            print(f'''
+                 Cliente: {clientedoAluguel[0]}
+                 Cliente: {livroDoAluguel[1]}
+                 livros: {aluguel[0]}
+                 livros: {aluguel[3]}
+                    
+                    ''')  
+
+    else:
+        input("Enter...") 
 
 def verListaAlugueis():
     
@@ -74,6 +123,7 @@ def verListaAlugueis():
     listaAlugueis = conexaoLivros.consultaLivros('''
     
     SELECT * FROM "Alugueis"
+    ORDER BY "Id_Aluguel" ASC
     
     ''')
 
@@ -106,6 +156,124 @@ def verListaAlugueis():
          ''')
 
     input("Enter...")    
+
+def deletarLivro():
+
+    verListaLivros()
+     
+    apagarLivro = input("Digite o id do Livro que deseja apagar: ")
+
+    conexaoLivros.alterarLivros(f'''
+     
+     DELETE FROM 
+           "Livros"
+           WHERE
+           "Id_Livro" = {apagarLivro}
+         
+     ''')
+    print("Livro Deletado com Sucesso!")
+    input("Enter...")
+    
+
+def deletarCliente():
+
+    verListaClientes()
+     
+    apagarCliente = input("Digite o id do Cliente que deseja apagar: ")
+
+    conexaoLivros.alterarLivros(f'''
+     
+     DELETE FROM 
+           "Clientes"
+           WHERE
+           "Id_Cliente" = {apagarCliente}
+         
+     ''')
+    
+    print("Cliente Deletado com Sucesso!")
+    input("Enter...")
+
+def deletarAluguel():
+
+    verListaAlugueis()
+     
+    apagarAluguel = input("Digite o id do Aluguel que deseja apagar: ")
+
+    conexaoLivros.alterarLivros(f'''
+     
+     DELETE FROM 
+           "Alugueis"
+           WHERE
+           "Id_Aluguel" = {apagarAluguel}
+         
+     ''')  
+    print("Aluguel Deletado com Sucesso!")
+    input("Enter...")
+
+def atualizarCliente():
+
+    verListaClientes()
+
+    idEspecifico = input("Digite o id do Cliente que deseja atualizar: ")
+    novoNome = input("Digite o nome do Cliente: ")
+
+    conexaoLivros.alterarLivros(f'''
+    
+    UPDATE "Clientes"
+    SET 
+    "Nome_Cliente" = '{novoNome}'
+    WHERE
+    "Id_Cliente" = {idEspecifico}
+    
+    ''')
+    print("Cliente Atualizado com Sucesso!")
+    input("Enter...")    
+
+
+def atualizarLivro():
+
+    verListaLivros()
+
+    idLivro = input("Digite o id do Livro que deseja atualizar: ")
+    novoNomeLivro = input("Digite o novo nome do Livro: ")
+    novoNomeAutor = input("Digite o novo nome do Autor: ")
+
+    conexaoLivros.alterarLivros(f'''
+    
+    UPDATE "Livros"
+    SET
+    "Nome_Livro" = '{novoNomeLivro}',
+    "Autor_Livro" = '{novoNomeAutor}'
+    WHERE 
+    "Id_Livro" = {idLivro}
+    
+    ''')
+    print("Livro Atualizado com Sucesso!")
+    input("Enter...")
+
+def atualizarAluguel():
+
+    verListaAlugueis()
+
+    idAluguel = input("Digite o ID do Aluguel que deseja atualizar: ")
+    novoIdLivro = input("Digite o ID do livro: ")
+    novoIdCliente = input("Digite o ID do Cliente: ")
+    novaDevolucao = input("Digite a nova data de entrega: ")
+
+    conexaoLivros.alterarLivros(f'''
+    
+    UPDATE "Alugueis"
+    SET 
+    "Id_Livro" = {novoIdLivro},
+    "Id_Cliente" = {novoIdCliente},
+    "Devolução_Aluguel" = {novaDevolucao}
+    WHERE 
+    "Id_Aluguel" = {idAluguel}
+    
+    
+    ''')
+    print("Aluguel Atualizado com Sucesso!")
+    input("Enter...")
 
 try:
     # conexaoLivros.alterarLivros('''
@@ -175,39 +343,104 @@ try:
          print('''
          
             Menu:
-            1 - Ver Livros
-            2 - Ver Clientes
-            3 - Ver Alugueis
-            4 - Cadastrar Livro
-            5 - Cadastrar Cliente
-            6 - Cadastrar Aluguel
-            0 - Sair
+            1 - Menu Livros
+            2 - Menu Clientes
+            3 - Menu Alugueis
+            0 - Sair do Programa
 
          ''')
          op = input("Digite uma opção: ")
 
          match op:
                case "1": 
-                   verListaLivros()
+                   
+                   print('''
+                   
+                   Menu livros:
+                   1 - Ver Livros
+                   2 - Cadastrar Livro
+                   3 - Deletar Livro
+                   4 - Atualizar Livro
+                   0 - Voltar ao Menu Principal
+                   ''')
+                 
+
+                   op = input("Digite uma opção: ") 
+
+                   match op:
+                        case "1":
+                           verListaLivros()
+                        case "2":
+                           inserirLivro()
+                        case "3":
+                           deletarLivro()
+                        case "4":
+                           atualizarLivro()       
+                        case "0":
+                           print("Voltando ao menu principal...") 
+                           breakpoint        
                
                case "2": 
-                   verListaClientes()
+                   print('''
+                   
+                   Menu Clientes:
+                   1 - Ver Clientes
+                   2 - Cadastrar Cliente
+                   3 - Deletar Cliente
+                   4 - Atualizar Cliente
+                   0 - Voltar ao Menu Principal                   
+                   ''')
+                   
+
+
+                   op = input("Digite uma opção: ")
+
+                   match op:
+                       case "1":
+                           verListaClientes()
+                       case "2":
+                           inserirCliente()
+                       case "3":
+                           deletarCliente()
+                       case "4":
+                           atualizarCliente()       
+                       case "0":
+                           print("Voltando ao Menu Principal...")
+                           breakpoint               
               
                case "3": 
-                   verListaAlugueis()
+                   print('''
+                   
+                    Menu Alugueis:
 
-               case "4": 
-                   inserirLivro()
-              
-               case "5": 
-                   inserirCliente()
-    
-               case "6": 
-                   inserirAluguel()
+                    1 - Ver Alugueis
+                    2 - Cadastrar Aluguel
+                    3 - Deletar Aluguel
+                    4 - Atualizar Aluguel
+                    0 - Voltar ao Menu Principal
 
+                   ''')
+
+
+                   op = input("Digite uma opção: ")
+
+                   match op:
+                       case "1":
+                           verListaAlugueis()
+                       case "2":
+                           inserirAluguel()
+                       case "3":
+                            deletarAluguel()
+                       case "4":
+                           atualizarAluguel()        
+                       case "0":
+                           print("Voltando ao Menu Principal...")
+                           breakpoint          
                case "0":
-                   print("Saindo...")
-                   break         
+                 print("Saindo do Programa...")
+                 break   
+              
+                     
 
 except(Exception,psycopg2.Error) as error:
      print("Ocorreu um erro: ", error)       
