@@ -12,7 +12,6 @@ def criarTabelaFuncionario():
         "Salario_Func" float(2) NOT NULL default 0.00,
         "Cargo_Func" char (255) NOT NULL default 'Autonomo',
         "Id_Departamento" integer 
-
     )    
     
     return sql
